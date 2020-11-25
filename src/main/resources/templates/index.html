@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Firm Id</th>
+        <th>Action</th>
+    </tr>
+    <div th:each="user : ${users}">
+        <tr>
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getUsername()}">Username</td>
+            <td th:text="${user.getPassword()}">Password</td>
+            <td th:text="${user.getEmail()}">Email</td>
+            <td th:text="${user.getRole()}">getRole</td>
+            <td th:text="${user.getFirmId()}">FirmId</td>
+
+            <td style="align-content: center">
+                <form th:action="deleteUser" method="post">
+                    <button name="delete" formmethod="post" type="submit" th:value="${user.getId()}">Delete</button>
+                </form>
+                <form th:action="'updateUser/'+${user.getId()}" method="post">
+                    <button name="update" formmethod="post" type="submit" th:value="${user.getId()}">Update</button>
+                </form>
+            </td>
+        </tr>
+    </div>
+    <form th:action="addUser" method="post" th:object="${newUser}">
+        <tr>
+            <td><input th:field="*{id}" type="number" name="id" id="id" size="10" required></td>
+            <td><input th:field="*{username}" name="username" id="username" type="text" size="10" required></td>
+            <td><input th:field="*{password}" name="password" id="password" type="text" size="10" required></td>
+            <td><input th:field="*{email}" name="email" id="email" type="text" size="10" required></td>
+            <td><input th:field="*{role}" name="role" id="role" type="text" size="10" required></td>
+            <td><input th:field="*{firmId}" name="firmId" id="firmId" type="number" size="4" required></td>
+            <td>
+                <button name="submitUserUpdate" type="submit" formmethod="post">Add user</button>
+            </td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>
