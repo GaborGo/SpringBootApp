@@ -1,9 +1,18 @@
 package com.springboot.contapp.models;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name="suppliers")
 public class Supplier {
+    @Id
+    @Column(name = "supplierId")
     private int id;
     private String name;
     private int firmId;
+    @OneToMany(mappedBy = "supplier")
+    private Set<Invoice> invoices;
 
     public Supplier() {}
 

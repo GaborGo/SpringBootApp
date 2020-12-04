@@ -1,43 +1,23 @@
-package com.springboot.contapp.models;
+package com.springboot.contapp.services.dto;
+import com.springboot.contapp.models.Payment;
+import com.springboot.contapp.models.Supplier;
 
-import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "invoices")
-public class Invoice {
-    @Id
-    @Column(name = "invoiceId")
+public class InvoiceDto {
+
     private int id;
     private int number;
     private Date emitDate;
     private Date scadentDate;
     private int value;
     private int sold;
-
-    @ManyToOne
-    @JoinColumn(name="supplier_id")
     private Supplier supplier;
+    private Set<Payment> payments = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "invoice_payments",
-    joinColumns = @JoinColumn(name = "invoice_id"),
-    inverseJoinColumns = @JoinColumn(name = "payment_id"))
-    private List<Payment> payments = new ArrayList<>();
-
-    public Invoice() {}
-
-    public Invoice(int id, int number, Date emitDate, Date scadentDate, int value, int sold) {
-        this.id = id;
-        this.number = number;
-        this.emitDate = emitDate;
-        this.scadentDate = scadentDate;
-        this.value = value;
-        this.sold = sold;
+    public InvoiceDto() {
     }
 
     public int getId() {
@@ -88,11 +68,19 @@ public class Invoice {
         this.sold = sold;
     }
 
-    public List<Payment> getPayments() {
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Set<Payment> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<Payment> payments) {
+    public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
 }

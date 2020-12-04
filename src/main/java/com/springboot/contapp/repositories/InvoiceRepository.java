@@ -1,20 +1,18 @@
 package com.springboot.contapp.repositories;
 
-import com.springboot.contapp.models.User;
+import com.springboot.contapp.models.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-
-    List<User> findAll();
-
-    User findUserById(int id);
+public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 
     @Transactional
-    void deleteUserById(int id);
+    void deleteInvoiceById(int id);
+
+    Invoice findInvoiceById(int id);
 
 }

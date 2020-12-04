@@ -1,34 +1,12 @@
-package com.springboot.contapp.models;
+package com.springboot.contapp.services.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @Column(name = "user_ID")
+public class UserDto {
     private int id;
     private int firmId;
     private String username;
     private String password;
     private String email;
     private String role;
-
-    public User() {
-    }
-
-    public User(int id, int firmId, String username, String password, String email, String role) {
-        this.id = id;
-        this.firmId = firmId;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
 
     public int getId() {
         return id;
@@ -77,5 +55,4 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
 }
